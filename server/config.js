@@ -210,5 +210,4 @@ const conf = convict({
 // Perform validation
 conf.validate({ allowed: 'strict' });
 
-const props = conf.getProperties();
-module.exports = props;
+module.exports = conf.getProperties();

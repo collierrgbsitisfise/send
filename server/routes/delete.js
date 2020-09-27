@@ -5,8 +5,10 @@ module.exports = async function(req, res) {
   try {
     const id = req.params.id;
     const meta = req.meta;
-    const ttl = await storage.ttl(id);
-    await storage.kill(id);
+    const [ttl,] = Promise.all([
+      storage.ttl(id),
+      storage.kill(id)
+    ])
     res.sendStatus(200);
     statDeleteEvent({
       id,

@@ -40,7 +40,6 @@ module.exports = {
       });
       const info = await result.json();
       if (
-        info.scope &&
         Array.isArray(info.scope) &&
         info.scope.includes(KEY_SCOPE)
       ) {

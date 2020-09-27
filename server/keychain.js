@@ -6,11 +6,10 @@ const decoder = new TextDecoder();
 
 module.exports = class Keychain {
   constructor(secretKeyB64) {
-    if (secretKeyB64) {
-      this.rawSecret = new Uint8Array(Buffer.from(secretKeyB64, 'base64'));
-    } else {
+    if (!secretKeyB64) {
       throw new Error('key is required');
     }
+    this.rawSecret = new Uint8Array(Buffer.from(secretKeyB64, 'base64'));
     this.secretKeyPromise = crypto.subtle.importKey(
       'raw',
       this.rawSecret,

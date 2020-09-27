@@ -35,7 +35,7 @@ class Metadata {
     return makeToken(this.owner, this.dlToken);
   }
 
-  async verifyDownloadToken(token) {
+  verifyDownloadToken(token) {
     const validTokens = Array.from({ length: this.dlToken }, (_, i) =>
       makeToken(this.owner, i + 1)
     );

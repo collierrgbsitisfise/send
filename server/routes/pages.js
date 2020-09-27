@@ -21,9 +21,14 @@ module.exports = {
 
   download: async function(req, res, next) {
     const id = req.params.id;
-    const appState = await state(req);
     try {
-      const { nonce, pwd, dead, flagged } = await storage.metadata(id);
+      const [
+        appState,
+        { nonce, pwd, dead, flagged },
+      ] = await Promise.all([
+        state(req),
+        storage.metadata(id),
+      ]);
       if (dead && !flagged) {
         return next();
       }
